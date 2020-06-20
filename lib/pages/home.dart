@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -10,7 +11,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen[900],
@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
             child: Column(
               children: <Widget>[
                 FlatButton.icon(
-                  onPressed: () { },
+                  onPressed: () {},
                   icon: Icon(
                     Icons.edit_location,
                     color: Colors.grey[300],
@@ -42,23 +42,52 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'test 2',
+                      'Workout'.toUpperCase(),
                       style: TextStyle(
-                        fontSize: 28.0,
+                        fontSize: 20.0,
                         letterSpacing: 2.0,
-                        color: Colors.redAccent,
+                        color: Colors.black54,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 20.0),
-                Text(
-                    'test',
-                    style: TextStyle(
-                        fontSize: 66.0,
-                        color: Colors.redAccent
-                    )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      '03:00',
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        color: Colors.blue[900],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
+                SizedBox(height: 40.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Stretch'.toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black54,
+                          letterSpacing: 2.0,
+                        )),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      '00:30',
+                      style: TextStyle(
+                          fontSize: 40.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue[900]),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
