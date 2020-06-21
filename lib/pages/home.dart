@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:madtrainer/pages/settings.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -7,7 +8,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Map data = {};
+
+  void _onItemTapped(int index) {
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Settings()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +141,7 @@ class _HomeState extends State<Home> {
           ),
         ],
         selectedItemColor: Colors.black,
+        onTap: _onItemTapped,
       ),
     );
   }
