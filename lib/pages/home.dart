@@ -8,14 +8,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Settings()),
-      );
-    });
+    void _onItemTapped(int index) {
+      setState(() {
+        print("selected index: " + index.toString());
+
+        if (index == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Settings()),
+          );
+        }
+      });
   }
 
   @override
@@ -50,7 +60,8 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('10',
+                    Text(
+                      '10',
                       style: TextStyle(
                         fontSize: 40.0,
                         color: Colors.blue[900],
@@ -140,6 +151,7 @@ class _HomeState extends State<Home> {
             title: Text('Settings'),
           ),
         ],
+        currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
         onTap: _onItemTapped,
       ),
