@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:madtrainer/pages/settings.dart';
+import 'dart:async';
 
 class Home extends StatefulWidget {
   @override
@@ -8,16 +9,45 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  AnimationController _controller;
   int _selectedIndex = 0;
+  bool _isButtonDisabled =
+      false; // make button disabled when exercising otherwise illegal boost
 
-  int _steps = 12;
-  int _workout = 45;
-  int _stretch = 18;
+  int _rounds = 12; // cycles
+  int _workout = 45; // workout time in seconds
+  int _rest = 18; // resting time in seconds
+  Timer _timer;
+
+  void startIt() {
+    int _round = _workout + _rest;
+    int _routine = _rounds * _round;
+
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) => setState(
+        () {
+          if (_round < 1) {
+            _isButtonDisabled = false;
+            timer.cancel();
+          } else {
+            _isButtonDisabled = true;
+
+            if (_workout < 1) {
+              _rest = _rest - 1;
+            } else {
+              _workout = _workout - 1;
+            }
+            _round = _round - 1;
+          }
+        },
+      ),
+    );
+  }
 
   void _onItemTapped(int index) {
     setState(() {
-      print("selected index: " + index.toString());
-
       if (index == 0) {
         Navigator.push(
           context,
@@ -65,7 +95,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      '$_steps',
+                      '$_rounds',
                       style: TextStyle(
                         fontSize: 40.0,
                         color: Colors.blue[900],
@@ -117,7 +147,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      '$_stretch',
+                      '$_rest',
                       style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
@@ -132,13 +162,19 @@ class _HomeState extends State<Home> {
                     RaisedButton(
                       onPressed: () {
                         setState(() {
-                          _workout--;
+                          _isButtonDisabled ? null : startIt();
                         });
                       },
                       child: Text('Start'.toUpperCase()),
                     ),
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          _timer.cancel();
+                          _workout = 45;
+                          _rest = 18;
+                        });
+                      },
                       child: Text('Stop'.toUpperCase()),
                     )
                   ],
