@@ -180,6 +180,7 @@ class _HomeState extends State<Home> {
                           _timer.cancel();
                           _workout = 45;
                           _rest = 18;
+                          _rounds = 0;
                         });
                       },
                       child: Text('Stop'.toUpperCase()),
