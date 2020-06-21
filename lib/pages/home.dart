@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
       oneSec,
       (Timer timer) => setState(
         () {
-          if (_round < 1) {
+          if (_routine < 1) {
             _isButtonDisabled = false;
             timer.cancel();
           } else {
@@ -36,10 +36,17 @@ class _HomeState extends State<Home> {
 
             if (_workout < 1) {
               _rest = _rest - 1;
+
+              if (_rest < 1) {
+                _workout = 45;
+                _rest = 18;
+                _rounds--;
+                _routine = _rounds * _round;
+              }
             } else {
               _workout = _workout - 1;
             }
-            _round = _round - 1;
+            _routine = _round - 1;
           }
         },
       ),
