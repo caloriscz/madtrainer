@@ -10,22 +10,26 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
-    void _onItemTapped(int index) {
-      setState(() {
-        print("selected index: " + index.toString());
+  int _steps = 12;
+  int _workout = 45;
+  int _stretch = 18;
 
-        if (index == 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Home()),
-          );
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Settings()),
-          );
-        }
-      });
+  void _onItemTapped(int index) {
+    setState(() {
+      print("selected index: " + index.toString());
+
+      if (index == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Settings()),
+        );
+      }
+    });
   }
 
   @override
@@ -61,7 +65,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      '10',
+                      '$_steps',
                       style: TextStyle(
                         fontSize: 40.0,
                         color: Colors.blue[900],
@@ -88,7 +92,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      '00:45',
+                      '$_workout',
                       style: TextStyle(
                         fontSize: 40.0,
                         color: Colors.blue[900],
@@ -113,7 +117,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      '00:20',
+                      '$_stretch',
                       style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
@@ -126,7 +130,11 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          _workout--;
+                        });
+                      },
                       child: Text('Start'.toUpperCase()),
                     ),
                     RaisedButton(
