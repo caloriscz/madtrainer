@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:madtrainer/pages/settings.dart';
 import 'dart:async';
+import 'package:madtrainer/services/setting_model.dart';
 
 class Home extends StatefulWidget {
   @override
